@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\TaskLogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::middleware('auth')->group(function () {
+    Route::post('/check-in', [AttendanceController::class, 'checkIn']);
+    Route::post('/check-out', [AttendanceController::class, 'checkOut']);
+    Route::post('/task-complete', [TaskLogController::class, 'markTaskComplete']);
 });
+

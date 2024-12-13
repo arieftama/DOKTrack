@@ -42,4 +42,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Relasi ke AttendanceLog
+     */
+    public function attendanceLogs()
+    {
+        return $this->hasMany(AttendanceLog::class);
+    }
+
+    /**
+     * Relasi ke TaskLog
+     */
+    public function taskLogs()
+    {
+        return $this->hasMany(TaskLog::class);
+    }
 }
