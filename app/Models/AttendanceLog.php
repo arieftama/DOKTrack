@@ -9,9 +9,10 @@ class AttendanceLog extends Model
 {
     use HasFactory;
 
-    public function user()
-{
-    return $this->belongsTo(User::class);
-}
+    protected $fillable = ['user_id', 'date', 'check_in', 'check_out'];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -9,23 +9,25 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('attendance_logs', function (Blueprint $table) {
+        Schema::create('task_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users'); // foreign key ke tabel users
+            $table->string('task_name');
+            $table->string('division');
+            $table->enum('status', ['pending', 'in_progress', 'complete']);
             $table->date('date');
-            $table->time('check_in')->nullable();
-            $table->time('check_out')->nullable();
+            $table->timestamp('timestamp')->useCurrent();
             $table->timestamps();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('attendance_logs');
+        Schema::dropIfExists('task_logs');
     }
 };

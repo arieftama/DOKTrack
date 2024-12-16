@@ -8,22 +8,51 @@ use App\Models\TaskLog;
 
 class TaskLogController extends Controller
 {
-    public function markTaskComplete(Request $request)
-{
-    $request->validate([
-        'file_name' => 'required|string',
-        'sector' => 'required|string'
-    ]);
+    /**
+     * Menampilkan form log tugas.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showForm()
+    {
+        return view('tasklog');
+    }
 
-    $taskLog = TaskLog::create([
-        'user_id' => Auth::id(),
-        'file_name' => $request->file_name,
-        'sector' => $request->sector,
-        'status' => 'complete',
-        'timestamp' => now(),
-    ]);
+    /**
+     * Menyimpan log tugas baru.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(Request $request)
+    {
+        $user = Auth::user();
+        $today = now()->format('Y-m-d');
 
-    return response()->json(['message' => 'Tugas selesai dicatat', 'data' => $taskLog]);
-}
+        // Validasi input
+        $request->validate([
+            'task_name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'division' => 'required|string',
+            'status' => 'required|string',
+            'date' => 'required|date',
+            'timestamp' => 'required|date_format:H:i:s',
+        ]);
 
+        // Simpan log tugas
+        $taskLog = TaskLog::create([
+            'user_id' => $user->id,
+            'task_name' => $request->input('task_name'),
+            'description' => $request->input('description'),
+            'division' => $request->input('division'),
+            'status' => $request->input('status'),
+            'date' => $request->input('date'),
+            'timestamp' => $request->input('timestamp'),
+        ]);
+
+        return response()->json([
+            'message' => 'Log tugas berhasil disimpan',
+            'data' => $taskLog,
+        ]);
+    }
 }

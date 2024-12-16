@@ -9,9 +9,26 @@ class TaskLog extends Model
 {
     use HasFactory;
 
-    public function user()
-{
-    return $this->belongsTo(User::class);
-}
+    /**
+     * Kolom yang bisa diisi (mass assignment).
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'task_name',
+        'division',
+        'status',
+        'date',
+        'timestamp',
+        'description',
+    ];
 
+    /**
+     * Relasi ke model User.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
