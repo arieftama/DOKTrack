@@ -29,10 +29,16 @@ class AttendanceController extends Controller
         $user = Auth::user(); // Mendapatkan user yang sedang login
         $today = now()->format('Y-m-d'); // Format tanggal saat ini
 
+        // Validasi input
+        $request->validate([
+            'date' => 'required|date',
+            'check_in' => 'required|date_format:H:i',
+        ]);
+
         // Cek apakah user sudah check-in
         $attendance = AttendanceLog::firstOrCreate(
             ['user_id' => $user->id, 'date' => $today], // Kriteria unik
-            ['check_in' => now()] // Jika belum ada, set 'check_in'
+            ['check_in' => $request->input('check_in')] // Jika belum ada, set 'check_in'
         );
 
         return response()->json([
@@ -52,13 +58,19 @@ class AttendanceController extends Controller
         $user = Auth::user(); // Mendapatkan user yang sedang login
         $today = now()->format('Y-m-d'); // Format tanggal saat ini
 
+        // Validasi input
+        $request->validate([
+            'date' => 'required|date',
+            'check_out' => 'required|date_format:H:i',
+        ]);
+
         // Cek apakah user sudah check-in
         $attendance = AttendanceLog::where('user_id', $user->id)
             ->where('date', $today)
             ->first();
 
         if ($attendance && !$attendance->check_out) {
-            $attendance->check_out = now();
+            $attendance->check_out = $request->input('check_out');
             $attendance->save();
 
             return response()->json([
