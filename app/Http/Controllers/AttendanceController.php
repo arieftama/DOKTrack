@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AttendanceLog;
 
+
 class AttendanceController extends Controller
 {
     /**
@@ -15,7 +16,8 @@ class AttendanceController extends Controller
      */
     public function showForm()
     {
-        return view('attendance');
+        $attendanceLogs = AttendanceLog::where('user_id', auth()->user()->id)->get();
+        return view('attendance', compact('attendanceLogs'));
     }
 
     /**
@@ -26,26 +28,23 @@ class AttendanceController extends Controller
      */
     public function checkIn(Request $request)
     {
-        $user = Auth::user(); // Mendapatkan user yang sedang login
-        $today = now()->format('Y-m-d'); // Format tanggal saat ini
-
-        // Validasi input
-        $request->validate([
-            'date' => 'required|date',
-            'check_in' => 'required|date_format:H:i',
-        ]);
-
-        // Cek apakah user sudah check-in
-        $attendance = AttendanceLog::firstOrCreate(
-            ['user_id' => $user->id, 'date' => $today], // Kriteria unik
-            ['check_in' => $request->input('check_in')] // Jika belum ada, set 'check_in'
-        );
-
-        return response()->json([
-            'message' => 'Check-in berhasil',
-            'data' => $attendance,
-        ]);
+        $existingCheckIn = AttendanceLog::where('user_id', auth()->user()->id)
+                                ->where('date', now()->format('Y-m-d'))
+                                ->first();
+    
+        if ($existingCheckIn) {
+            return redirect()->back()->with('error', 'You have already checked in today.');
+        }
+    
+        $attendance = new AttendanceLog();
+        $attendance->user_id = auth()->user()->id;
+        $attendance->date = now()->format('Y-m-d');
+        $attendance->check_in = now()->format('H:i:s');
+        $attendance->save();
+    
+        return redirect()->back()->with('success', 'Check-in successful');
     }
+    
 
     /**
      * Melakukan check-out untuk user.
@@ -55,32 +54,16 @@ class AttendanceController extends Controller
      */
     public function checkOut(Request $request)
     {
-        $user = Auth::user(); // Mendapatkan user yang sedang login
-        $today = now()->format('Y-m-d'); // Format tanggal saat ini
-
-        // Validasi input
-        $request->validate([
-            'date' => 'required|date',
-            'check_out' => 'required|date_format:H:i',
-        ]);
-
-        // Cek apakah user sudah check-in
-        $attendance = AttendanceLog::where('user_id', $user->id)
-            ->where('date', $today)
-            ->first();
-
-        if ($attendance && !$attendance->check_out) {
-            $attendance->check_out = $request->input('check_out');
+        $attendance = AttendanceLog::where('user_id', auth()->user()->id)
+                                ->where('date', now()->format('Y-m-d'))
+                                ->first();
+        if ($attendance) {
+            $attendance->check_out = now()->format('H:i:s');
             $attendance->save();
 
-            return response()->json([
-                'message' => 'Check-out berhasil',
-                'data' => $attendance,
-            ]);
+            return redirect()->back()->with('success', 'Check-out successful');
         }
 
-        return response()->json([
-            'message' => 'Check-out gagal, Anda belum check-in atau sudah check-out',
-        ], 400);
+        return redirect()->back()->with('error', 'Check-in record not found');
     }
 }
