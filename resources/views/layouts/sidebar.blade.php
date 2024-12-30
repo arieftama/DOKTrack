@@ -30,10 +30,19 @@
       </li>
 
       <li class="nav-item">
-        <a href="{{ route('tasklog.form') }}" class="nav-link">
+        <a href="{{ route('tasklog.create') }}" class="nav-link">
           <i class="nav-icon fas fa-tasks"></i>
           <p>
             Task Log
+          </p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="{{ route('tasklog.index') }}" class="nav-link">
+          <i class="nav-icon fas fa-tasks"></i>
+          <p>
+            Daftar Log Tugas
           </p>
         </a>
       </li>

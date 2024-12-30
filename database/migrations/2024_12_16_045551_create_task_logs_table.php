@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users'); // foreign key ke tabel users
             $table->string('task_name');
-            $table->string('division');
-            $table->enum('status', ['pending', 'in_progress', 'complete']);
+            $table->text('description');
+            $table->enum('status', ['pending', 'in_progress', 'complete'])->default('pending');
             $table->date('date');
             $table->timestamp('timestamp')->useCurrent();
             $table->timestamps();

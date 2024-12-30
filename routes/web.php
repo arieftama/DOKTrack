@@ -5,7 +5,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\TaskLogController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +27,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
     // Absensi
@@ -35,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/attendance/check-out', [AttendanceController::class, 'checkOut'])->name('attendance.checkOut');
 
     // Log Tugas
-    Route::get('/tasklog', [TaskLogController::class, 'showForm'])->name('tasklog.form');
+    Route::get('/tasklog', [TaskLogController::class, 'index'])->name('tasklog.index');
+    Route::get('/tasklog/create', [TaskLogController::class, 'showForm'])->name('tasklog.create');
     Route::post('/tasklog/store', [TaskLogController::class, 'store'])->name('tasklog.store');
 });

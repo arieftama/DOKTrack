@@ -17,11 +17,10 @@ class TaskLog extends Model
     protected $fillable = [
         'user_id',
         'task_name',
-        'division',
+        'description',
         'status',
         'date',
         'timestamp',
-        'description',
     ];
 
     /**
