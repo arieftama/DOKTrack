@@ -6,6 +6,7 @@ use App\Http\Controllers\TaskLogController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\MessageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,4 +41,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tasklog', [TaskLogController::class, 'index'])->name('tasklog.index');
     Route::get('/tasklog/create', [TaskLogController::class, 'showForm'])->name('tasklog.create');
     Route::post('/tasklog/store', [TaskLogController::class, 'store'])->name('tasklog.store');
+    Route::post('/tasklog/store-with-message', [TaskLogController::class, 'storeWithMessage'])->name('tasklog.storeWithMessage');
 });
+
+// Member
+Route::get('/messages', [MessageController::class, 'index'])->name('messages.index'); // List pesan
+Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create'); // Form kirim pesan
+Route::post('/messages/store', [MessageController::class, 'store'])->name('messages.store'); // Simpan pesan
+
+// Admin
+Route::get('/admin/messages', [MessageController::class, 'adminIndex'])->name('admin.messages.index'); // List pesan untuk admin
+Route::post('/admin/messages/respond/{id}', [MessageController::class, 'respond'])->name('admin.messages.respond'); // Tanggapan admin
+Route::post('/admin/messages/delete/{id}', [MessageController::class, 'delete'])->name('admin.messages.delete'); // Hapus pesan

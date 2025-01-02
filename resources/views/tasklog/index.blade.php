@@ -29,6 +29,7 @@
                     <th>Status</th>
                     <th>Tanggal</th>
                     <th>Waktu</th>
+                    <th>Pesan</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +43,13 @@
                         <td>{{ $log->date }}</td>
                         <td>{{ $log->timestamp }}</td>
                     </tr>
+                    @if ($log->message)
+                        <tr>
+                            <td colspan="6">
+                                <strong>Message:</strong> {{ $log->message->message }}
+                            </td>
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>

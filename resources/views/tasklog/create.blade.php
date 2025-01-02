@@ -18,7 +18,7 @@
 
 @section('content')
 <div class="container">
-<form action="{{ route('tasklog.store') }}" method="POST">
+<form action="{{ route('tasklog.storeWithMessage') }}" method="POST">
     @csrf
     <div class="form-group">
         <label for="task_name">Nama Tugas</label>
@@ -43,6 +43,10 @@
     <div class="form-group">
         <label for="date">Tanggal</label>
         <input type="date" name="date" id="date" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="message">Pesan ke Admin</label>
+        <textarea name="message" id="message" class="form-control"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Simpan</button>
 </form>
