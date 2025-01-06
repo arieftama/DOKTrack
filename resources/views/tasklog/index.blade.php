@@ -42,14 +42,14 @@
                         <td>{{ $log->status }}</td>
                         <td>{{ $log->date }}</td>
                         <td>{{ $log->timestamp }}</td>
+                        <td>
+                            @if ($log->message)
+                                <strong></strong> {{ $log->message->message }}
+                            @else
+                                No message
+                            @endif
+                        </td>
                     </tr>
-                    @if ($log->message)
-                        <tr>
-                            <td colspan="6">
-                                <strong>Message:</strong> {{ $log->message->message }}
-                            </td>
-                        </tr>
-                    @endif
                 @endforeach
             </tbody>
         </table>

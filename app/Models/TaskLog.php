@@ -30,4 +30,12 @@ class TaskLog extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Relasi ke model Message.
+     */
+    public function message()
+    {
+        return $this->hasOne(Message::class, 'task_id');
+    }
 }

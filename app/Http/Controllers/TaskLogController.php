@@ -92,7 +92,10 @@ class TaskLogController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $taskLogs = TaskLog::where('user_id', $user->id)->orderBy('date', 'desc')->get();
+        $taskLogs = TaskLog::where('user_id', $user->id)
+            ->with('message') // Eager load the related messages
+            ->orderBy('date', 'desc')
+            ->get();
 
         return view('tasklog.index', compact('taskLogs'));
     }
