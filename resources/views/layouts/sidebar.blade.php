@@ -29,22 +29,53 @@
         </a>
       </li>
 
-      <li class="nav-item">
-        <a href="{{ route('tasklog.create') }}" class="nav-link">
-          <i class="nav-icon fas fa-tasks"></i>
+      <li class="nav-item {{ request()->routeIs('tasklog.*') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-envelope"></i>
           <p>
             Task Log
+            <i class="right fas fa-angle-left"></i>
           </p>
         </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{ route('tasklog.create') }}" class="nav-link {{ request()->routeIs('tasklog.create') ? 'active' : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Buat Tugas</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('tasklog.index') }}" class="nav-link {{ request()->routeIs('tasklog.index') ? 'active' : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Log Tugas</p>
+            </a>
+          </li>
+        </ul>
       </li>
 
-      <li class="nav-item">
-        <a href="{{ route('tasklog.index') }}" class="nav-link">
-          <i class="nav-icon fas fa-tasks"></i>
+
+      <li class="nav-item {{ request()->routeIs('messages.*') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-envelope"></i>
           <p>
-            Daftar Log Tugas
+            Pesan
+            <i class="right fas fa-angle-left"></i>
           </p>
         </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{ route('messages.index') }}" class="nav-link {{ request()->routeIs('messages.index') ? 'active' : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Daftar Pesan</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('messages.create') }}" class="nav-link {{ request()->routeIs('messages.create') ? 'active' : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Buat Pesan</p>
+            </a>
+          </li>
+        </ul>
       </li>
 
       <li class="nav-item">
@@ -53,7 +84,7 @@
           <p>Logout</p>
         </a>
       </li>
-
+    </ul>
       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
           @csrf
       </form>

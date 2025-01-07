@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('task_id')->nullable(); // Task log related to the message
             $table->text('message'); // Isi pesan
             $table->text('response')->nullable(); // Tanggapan admin
+            $table->boolean('is_replied')->default(false); // Status pesan sudah dijawab atau belum
             $table->timestamps();
         
             // Foreign key

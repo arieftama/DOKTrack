@@ -13,6 +13,7 @@ class Message extends Model
         'message',
         'task_id',
         'response',
+        'is_response',
     ];
 
     // Relasi ke User
