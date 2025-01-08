@@ -26,7 +26,9 @@
     {{-- Form kirim pesan --}}
     <form action="{{ route('messages.store') }}" method="POST">
         @csrf
-        <input type="hidden" name="task_id" value="{{ $task_id ?? '' }}">
+        @if(isset($task_id))
+            <input type="hidden" name="task_id" value="{{ $task_id }}">
+        @endif
         <div class="form-group">
             <label for="message">Pesan</label>
             <textarea name="message" id="message" class="form-control" rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>

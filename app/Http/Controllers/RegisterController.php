@@ -46,4 +46,33 @@ class RegisterController extends Controller
 
         return redirect()->route('dashboard');
     }
+
+    /**
+     * Handle a registration request for the application by an admin.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function adminRegister(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|in:admin,member',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+        ]);
+
+        if ($user) {
+            return redirect()->back()->with('success', 'Account created successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Failed to create account.');
+        }
+    }
 }

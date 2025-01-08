@@ -38,4 +38,8 @@ class TaskLog extends Model
     {
         return $this->hasOne(Message::class, 'task_id');
     }
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'task_id');
+    }
 }

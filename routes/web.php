@@ -7,7 +7,8 @@ use App\Http\Controllers\{
     LoginController,
     DashboardController,
     RegisterController,
-    MessageController
+    MessageController,
+    AdminController
 };
 
 /*
@@ -33,6 +34,10 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
+Route::post('/admin/register', [AdminController::class, 'register'])
+    ->name('admin.register')
+    ->middleware('admin');
+
 
 // Middleware untuk rute yang memerlukan autentikasi
 Route::middleware(['auth'])->group(function () {
@@ -49,7 +54,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [TaskLogController::class, 'index'])->name('tasklog.index');
         Route::get('/create', [TaskLogController::class, 'showForm'])->name('tasklog.create');
         Route::post('/store', [TaskLogController::class, 'store'])->name('tasklog.store');
-        Route::post('/store-with-message', [TaskLogController::class, 'storeWithMessage'])->name('tasklog.storeWithMessage');
+        Route::get('/edit/{id}', [TaskLogController::class, 'edit'])->name('tasklog.edit');
+        Route::post('/update/{id}', [TaskLogController::class, 'update'])->name('tasklog.update');
+        Route::post('/delete/{id}', [TaskLogController::class, 'destroy'])->name('tasklog.delete');
     });
 
     // Pesan (Message)
@@ -59,6 +66,11 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store', [MessageController::class, 'store'])->name('messages.store'); // Simpan pesan
         Route::get('/{id}', [MessageController::class, 'show'])->name('messages.show'); // Tampilkan pesan
     });
+
+    // Account view
+    Route::get('/account', function () {
+        return view('Account');
+    })->name('account.view');
 
     // Admin Routes (hanya untuk admin)
     Route::middleware(['admin'])->prefix('admin/messages')->group(function () {

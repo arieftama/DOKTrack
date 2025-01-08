@@ -11,9 +11,9 @@ class Message extends Model
     protected $fillable = [
         'user_id',
         'message',
-        'task_id',
         'response',
         'is_response',
+        'task_id', // Optional task ID
     ];
 
     // Relasi ke User

@@ -30,6 +30,7 @@
                     <th>Tanggal</th>
                     <th>Waktu</th>
                     <th>Pesan</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,6 +49,13 @@
                             @else
                                 No message
                             @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('tasklog.edit', $log->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('tasklog.delete', $log->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
