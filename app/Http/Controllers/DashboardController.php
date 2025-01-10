@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\TaskLog;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard'); // Pastikan file blade bernama 'dashboard.blade.php' ada di folder resources/views
+        $totalTasks = TaskLog::count();
+        $pendingTasks = TaskLog::where('status', 'pending')->count();
+        $completedTasks = TaskLog::where('status', 'complete')->count();
+
+        return view('dashboard', compact('totalTasks', 'pendingTasks', 'completedTasks'));
     }
 }

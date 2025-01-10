@@ -27,7 +27,7 @@
             @csrf
             <div class="mb-3">
                 <label for="check_in" class="form-label">Waktu Check-in</label>
-                <input type="text" class="form-control" id="check_in" name="check_in" value="{{ now()->format('H:i:s') }}" readonly>
+                <input type="text" class="form-control" id="check_in" name="check_in" readonly>
             </div>
             <button type="submit" class="btn btn-primary">Check-in</button>
         </form>
@@ -36,7 +36,7 @@
             @csrf
             <div class="mb-3">
                 <label for="check_out" class="form-label">Waktu Check-out</label>
-                <input type="text" class="form-control" id="check_out" name="check_out" value="{{ now()->format('H:i:s') }}" readonly>
+                <input type="text" class="form-control" id="check_out" name="check_out" readonly>
             </div>
             <button type="submit" class="btn btn-secondary">Check-out</button>
         </form>
@@ -62,6 +62,17 @@
         </table>
     </div>
 
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toTimeString().split(' ')[0];
+            document.getElementById('check_in').value = timeString;
+            document.getElementById('check_out').value = timeString;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
