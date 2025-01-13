@@ -7,6 +7,25 @@
 @stop
 
 @section('content')
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
+<section class="content">
 <div class="container">
     <div class="row mt-4">
         <div class="col-md-3">
@@ -87,51 +106,7 @@
     <script src="{{ asset('lte/plugins/moment/moment.min.js') }}"></script>
     <script src="{{ asset('lte/plugins/fullcalendar/main.js') }}"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var ctx = document.getElementById('barChart').getContext('2d');
-            var barChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                    datasets: [
-                        {
-                            label: 'Electronics',
-                            backgroundColor: 'rgba(60,141,188,0.9)',
-                            borderColor: 'rgba(60,141,188,0.8)',
-                            pointRadius: false,
-                            pointColor: '#3b8bba',
-                            pointStrokeColor: 'rgba(60,141,188,1)',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(60,141,188,1)',
-                            data: [65, 59, 80, 81, 56, 55, 40]
-                        },
-                        {
-                            label: 'Digital Goods',
-                            backgroundColor: 'rgba(210, 214, 222, 1)',
-                            borderColor: 'rgba(210, 214, 222, 1)',
-                            pointRadius: false,
-                            pointColor: 'rgba(210, 214, 222, 1)',
-                            pointStrokeColor: '#c1c7d1',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(220,220,220,1)',
-                            data: [28, 48, 40, 19, 86, 27, 90]
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    datasetFill: false,
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-
+        $(function () {
             function ini_events(ele) {
                 ele.each(function () {
                     var eventObject = {

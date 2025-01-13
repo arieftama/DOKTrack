@@ -8,7 +8,8 @@ use App\Http\Controllers\{
     DashboardController,
     RegisterController,
     MessageController,
-    AdminController
+    AdminController,
+    AccountController
 };
 
 /*
@@ -67,10 +68,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{id}', [MessageController::class, 'show'])->name('messages.show'); // Tampilkan pesan
     });
 
-    // Account view
-    Route::get('/account', function () {
-        return view('Account');
-    })->name('account.view');
+    // Account routes
+    Route::prefix('account')->group(function () {
+        Route::get('/', [AccountController::class, 'index'])->name('account.index');
+        Route::get('/create', [AccountController::class, 'create'])->name('account.create');
+        Route::get('/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
+        Route::put('/update/{id}', [AccountController::class, 'update'])->name('account.update');
+        Route::delete('/delete/{id}', [AccountController::class, 'destroy'])->name('account.delete');
+    });
 
     // Admin Routes (hanya untuk admin)
     Route::middleware(['admin'])->prefix('admin/messages')->group(function () {

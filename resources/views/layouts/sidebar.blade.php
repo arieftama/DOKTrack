@@ -31,7 +31,7 @@
 
       <li class="nav-item {{ request()->routeIs('tasklog.*') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-envelope"></i>
+          <i class="nav-icon fas fa-tasks"></i>
           <p>
             Task Log
             <i class="right fas fa-angle-left"></i>
@@ -41,13 +41,13 @@
           <li class="nav-item">
             <a href="{{ route('tasklog.create') }}" class="nav-link {{ request()->routeIs('tasklog.create') ? 'active' : '' }}">
               <i class="far fa-circle nav-icon"></i>
-              <p>Buat Tugas</p>
+              <p>Create Task</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('tasklog.index') }}" class="nav-link {{ request()->routeIs('tasklog.index') ? 'active' : '' }}">
               <i class="far fa-circle nav-icon"></i>
-              <p>Log Tugas</p>
+              <p>Task Log</p>
             </a>
           </li>
         </ul>
@@ -58,7 +58,7 @@
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-envelope"></i>
           <p>
-            Pesan
+            Messages
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
@@ -66,23 +66,40 @@
           <li class="nav-item">
             <a href="{{ route('messages.index') }}" class="nav-link {{ request()->routeIs('messages.index') ? 'active' : '' }}">
               <i class="far fa-circle nav-icon"></i>
-              <p>Daftar Pesan</p>
+              <p>Message List</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('messages.create') }}" class="nav-link {{ request()->routeIs('messages.create') ? 'active' : '' }}">
               <i class="far fa-circle nav-icon"></i>
-              <p>Buat Pesan</p>
+              <p>Create Message</p>
             </a>
           </li>
         </ul>
       </li>
 
-      <li class="nav-item">
-        <a href="{{ route('account.view') }}" class="nav-link">
+      <li class="nav-item {{ request()->routeIs('account.*') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link">
           <i class="nav-icon fas fa-user"></i>
-          <p>Account</p>
+          <p>
+            Account
+            <i class="right fas fa-angle-left"></i>
+          </p>
         </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{ route('account.index') }}" class="nav-link {{ request()->routeIs('account.index') ? 'active' : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>User List</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('account.create') }}" class="nav-link {{ request()->routeIs('account.create') ? 'active' : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Create User</p>
+            </a>
+          </li>
+        </ul>
       </li>
 
       <li class="nav-item">
