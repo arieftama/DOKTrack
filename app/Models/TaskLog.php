@@ -20,7 +20,6 @@ class TaskLog extends Model
         'description',
         'status',
         'date',
-        'timestamp',
     ];
 
     /**

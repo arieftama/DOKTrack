@@ -9,7 +9,8 @@ use App\Http\Controllers\{
     RegisterController,
     MessageController,
     AdminController,
-    AccountController
+    AccountController,
+    ReportController,
 };
 
 /*
@@ -83,5 +84,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/reply/{id}', [MessageController::class, 'showReplyForm'])->name('admin.messages.reply_form'); // Form balasan admin
         Route::post('/reply/{id}', [MessageController::class, 'reply'])->name('admin.messages.reply'); // Tanggapan admin
         Route::post('/delete/{id}', [MessageController::class, 'delete'])->name('admin.messages.delete'); // Hapus pesan
+    });
+
+    Route::middleware(['auth'])->prefix('report')->group(function () {
+        Route::get('/laporan', [ReportController::class, 'index'])->name('report.index');
+        Route::get('/export-pdf', [ReportController::class, 'exportPDF'])->name('report.exportPDF');
+        Route::get('/export-excel', [ReportController::class, 'exportExcel'])->name('report.exportExcel');
     });
 });
