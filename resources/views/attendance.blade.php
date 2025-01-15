@@ -1,7 +1,6 @@
-<!-- filepath: /C:/laragon/www/DOKTrack/resources/views/attendance.blade.php -->
 @extends('layouts.main')
 
-@section('title', 'Attendance')   
+@section('title', 'Attendance')
 
 @section('content_header')
     <h1>Attendance</h1>
@@ -27,7 +26,8 @@
             @csrf
             <div class="mb-3">
                 <label for="check_in" class="form-label">Waktu Check-in</label>
-                <input type="text" class="form-control" id="check_in" name="check_in" readonly>
+                <input type="text" class="form-control" id="check_in" name="check_in" readonly value="{{ now()->format('H:i:s') }}">
+
             </div>
             <button type="submit" class="btn btn-primary">Check-in</button>
         </form>
@@ -36,7 +36,7 @@
             @csrf
             <div class="mb-3">
                 <label for="check_out" class="form-label">Waktu Check-out</label>
-                <input type="text" class="form-control" id="check_out" name="check_out" readonly>
+                <input type="text" class="form-control" id="check_out" name="check_out" readonly value="{{ now()->format('H:i:s') }}">
             </div>
             <button type="submit" class="btn btn-secondary">Check-out</button>
         </form>
@@ -63,17 +63,25 @@
     </div>
 
     <script>
-        function updateTime() {
+        // Fungsi untuk mendapatkan waktu lokal di zona UTC+8 (WITA)
+        function getLocalTimeUTC8() {
             const now = new Date();
-            const timeString = now.toTimeString().split(' ')[0];
-            document.getElementById('check_in').value = timeString;
-            document.getElementById('check_out').value = timeString;
+            const utcNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+            const localNow = new Date(utcNow.getTime() + 8 * 3600000); // Adjust for UTC+8
+            const date = localNow.toISOString().split('T')[0]; // Format tanggal (YYYY-MM-DD)
+            const time = localNow.toTimeString().split(' ')[0]; // Format waktu (HH:MM:SS)
+            return `${time}`; // Gabungkan tanggal dan waktu
         }
 
-        setInterval(updateTime, 1000);
-        updateTime();
+        // Set waktu check-in dan check-out saat tombol ditekan
+        document.querySelector('form[action="{{ route('attendance.checkIn') }}"] button').addEventListener('click', function(e) {
+            document.getElementById('check_in').value = getLocalTimeUTC8();
+        });
+
+        document.querySelector('form[action="{{ route('attendance.checkOut') }}"] button').addEventListener('click', function(e) {
+            document.getElementById('check_out').value = getLocalTimeUTC8();
+        });
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
 @endsection

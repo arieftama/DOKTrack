@@ -6,7 +6,7 @@ use App\Models\AttendanceLog;
 use App\Models\TaskLog;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ReportExport;
-// use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReportController extends Controller
 {
@@ -24,14 +24,16 @@ class ReportController extends Controller
         return view('laporan', compact('attendanceLogs', 'taskLogs'));
     }
 
-    // public function exportPDF()
-    // {
-    //     $attendanceLogs = AttendanceLog::all();
-    //     $taskLogs = TaskLog::all();
+    public function exportPDF()
+    {
+        $attendanceLogs = AttendanceLog::all();
+        $taskLogs = TaskLog::all();
 
-    //     $pdf = PDF::loadView('laporan', compact('attendanceLogs', 'taskLogs'))->setPaper('a4', 'landscape');
-    //     return $pdf->download('laporan.pdf');
-    // }
+        // Gunakan view khusus untuk PDF
+        $pdf = PDF::loadView('laporan_pdf', compact('attendanceLogs', 'taskLogs'))->setPaper('a4', 'landscape');
+        return $pdf->download('laporan_absensi_log_tugas.pdf');
+    }
+
 
     public function exportExcel()
     {

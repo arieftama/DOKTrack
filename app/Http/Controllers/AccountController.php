@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
@@ -36,5 +37,10 @@ class AccountController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
         return redirect()->route('account.index')->with('success', 'User deleted successfully');
+    }
+
+    public function view()
+    {
+        return view('account.view', ['user' => Auth::user()]);
     }
 }

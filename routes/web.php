@@ -19,7 +19,7 @@ use App\Http\Controllers\{
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and assigned to the "web" 
+| routes are loaded by the RouteServiceProvider and assigned to the "web"
 | middleware group. Make something great!
 |
 */
@@ -38,8 +38,7 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/admin/register', [AdminController::class, 'register'])
     ->name('admin.register')
-    ->middleware('admin');
-
+    ->middleware('auth', 'admin');
 
 // Middleware untuk rute yang memerlukan autentikasi
 Route::middleware(['auth'])->group(function () {
@@ -76,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
         Route::put('/update/{id}', [AccountController::class, 'update'])->name('account.update');
         Route::delete('/delete/{id}', [AccountController::class, 'destroy'])->name('account.delete');
+        Route::get('/view', [AccountController::class, 'view'])->name('account.view');
     });
 
     // Admin Routes (hanya untuk admin)
