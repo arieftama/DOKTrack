@@ -1,11 +1,14 @@
 <!-- filepath: /C:/laragon/www/DOKTrack/resources/views/layouts/sidebar.blade.php -->
-<div class="sidebar" style="background-color: black">
+<div class="sidebar" style="background-color: #1b2a49;">
   <!-- Sidebar user panel (optional) -->
-  <div class="user-panel mt-3 pb-3 mb-3" style="background-color: #2c3e50; padding: 10px; border-radius: 5px; color: #ecf0f1;">
-    <div class="info" style="margin-bottom: 5px;">
-        <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+  <div class="user-panel mt-3 pb-3 mb-3 d-flex ">
+    <div class="image">
+      <img src="{{ asset('lte/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
     </div>
-  </div> 
+    <div class="info">
+      <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+    </div>
+  </div>
 
   <!-- Sidebar Menu -->
   <nav class="mt-2">
@@ -53,7 +56,6 @@
         </ul>
       </li>
 
-
       <li class="nav-item {{ request()->routeIs('messages.*') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-envelope"></i>
@@ -67,12 +69,6 @@
             <a href="{{ route('messages.index') }}" class="nav-link {{ request()->routeIs('messages.index') ? 'active' : '' }}">
               <i class="far fa-circle nav-icon"></i>
               <p>Message List</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('messages.create') }}" class="nav-link {{ request()->routeIs('messages.create') ? 'active' : '' }}">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Create Message</p>
             </a>
           </li>
         </ul>
@@ -118,10 +114,10 @@
         </a>
       </li>
     </ul>
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-          @csrf
-      </form>
-    </ul>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      @csrf
+    </form>
   </nav>
+  <!-- /.sidebar-menu -->
 </div>
-<!-- /.sidebar-menu -->
+<!-- /.sidebar -->

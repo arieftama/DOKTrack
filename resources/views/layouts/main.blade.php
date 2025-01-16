@@ -29,12 +29,12 @@
   <link rel="stylesheet" href="{{ asset ('lte/plugins/summernote/summernote-bs4.min.css') }}">
   <link rel="stylesheet" href="{{ asset ('css/styles.css') }}">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed d-flex flex-column min-vh-100">
 <div class="wrapper">
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset ('lte/dist/img/logo1.png') }}" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="{{ asset ('css/logo_dokpus.png') }}" alt="LogoDokpus" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -44,8 +44,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link" style="background-color: black">
-      <img src="{{ asset ('lte/dist/img/logo1.png') }}" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <a href="index3.html" class="brand-link" style="background-color: #1b2a49;">
+      <img src="{{ asset ('css/logo_dokpus.png') }}" class="brand-image img-box elevation-3" style="opacity: 1">
       <span class="brand-text font-weight-light">DOKTrack</span>
     </a>
 
@@ -55,7 +55,9 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-@yield('content')
+  <div class="content-wrapper flex-grow-1">
+    @yield('content')
+  </div>
   <!-- /.content-wrapper -->
 @include('layouts.footer')
 

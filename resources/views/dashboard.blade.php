@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <!-- Calendar -->
+    {{-- <!-- Calendar -->
     <div class="row mt-5">
         <div class="col-12">
             <div class="card">
@@ -74,10 +74,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Task Chart -->
-    <div class="row mt-5">
+    {{-- <div class="row mt-5">
         <div class="col-12">
             <div class="card">
                 <div class="card-header bg-success text-white">
@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 @stop
 

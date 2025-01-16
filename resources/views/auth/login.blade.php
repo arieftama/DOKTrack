@@ -18,55 +18,61 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-container">
-  <div class="login-box">
-    <div class="login-logo">
-      <a href="../../index2.html"><b>Dok</b>Track</a>
-    </div>
-    <!-- /.login-logo -->
-    <div class="card">
-      <div class="card-body login-card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="login-box">
+        <div class="login-logo">
+          <a href="../../index2.html"><b>Dok</b>Track</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+          <div class="card-body login-card-body">
+            <p class="login-box-msg">Sign in to start your session</p>
 
-        <form action="{{ route('login') }}" method="POST">
-          @csrf
-          <div class="input-group mb-3">
-            <input type="email" class="form-control" id="email" name="email" required>
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+            <form action="{{ route('login') }}" method="POST">
+              @csrf
+              <div class="input-group mb-3">
+                <input type="email" class="form-control" id="email" name="email" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="input-group mb-3">
-            <input type="password" class="form-control" id="password" name="password" required>
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
+              <div class="input-group mb-3">
+                <input type="password" class="form-control" id="password" name="password" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">
-                  Remember Me
-                </label>
+              <div class="row">
+                <div class="col-8">
+                  <div class="icheck-primary">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">
+                      Remember Me
+                    </label>
+                  </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-4">
+                  <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </div>
+                <!-- /.col -->
               </div>
-            </div>
-            <!-- /.col -->
-            <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-            </div>
-            <!-- /.col -->
+            </form>
+            <!-- /.login-card-body -->
           </div>
+        </div>
       </div>
-      </form>
-      <!-- /.login-card-body -->
     </div>
-  </div>
-  <div class="login-image">
-    <img src="{{ asset('css/Tvri.jpg') }}" alt="Login Image">
+    <div class="col-md-6">
+      <div class="login-image">
+        <img src="{{ asset('css/Tvri.jpg') }}" alt="Login Image" class="img-fluid">
+      </div>
+    </div>
   </div>
 </div>
 <!-- /.login-container -->
